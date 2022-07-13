@@ -22,6 +22,7 @@ import os
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
     
+<<<<<<< HEAD
     uniqid = str(req.params.get('uniqid'))
     gobi = f'(&(objectCategory=Person)(department={uniqid}))'
     ODScode = req.params.get('ods')
@@ -38,6 +39,22 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         if ent[0].employeeID != ODScode:
             ods = False
         myvalues = {'output':True, 'ods':ods, 'Accountstate':Accountstate}
+=======
+    uniqid = req.params.get('uniqid')
+    if not uniqid:
+        try:
+            req_body = req.get_json()
+        except ValueError:
+            pass
+        else:
+            uniqid = req_body.get('uniqid')
+    con=Connection("servername","xxx\\gobinath","password123",auto_bind='TLS_AFTER_BIND', authentication='NTLM')
+    
+    con.search("OU=People,DC=xxmailloadtest,DC=com",f"(cis2uid={uniqid})")
+    entries = con.entries 
+    if entries:
+        myvalues = {'output':True}
+>>>>>>> fb1fcbd4e22f5bb8658b83ff2b46b6a16e0a2002
         jsonv = json.dumps(myvalues)
         logging.info(jsonv)
         return func.HttpResponse(jsonv)
