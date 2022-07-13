@@ -5,6 +5,7 @@
             "name": "Attach to Python Functions",
             "type": "python",
             "request": "attach",
+            "timeout": 10,
             "port": 9091,
             "preLaunchTask": "func: host start"
         }
