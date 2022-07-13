@@ -18,9 +18,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             pass
         else:
             uniqid = req_body.get('uniqid')
-    con=Connection("nhsmail-ad1.nhsmailloadtest.com","nhsmailloadtest.com\\gobinath","Mageswaran225",auto_bind='TLS_AFTER_BIND', authentication='NTLM')
+    con=Connection("xxx.xxx.com","xxx\\gobinath","password123",auto_bind='TLS_AFTER_BIND', authentication='NTLM')
     
-    con.search("OU=People,DC=nhsmailloadtest,DC=com",f"(cis2uid={uniqid})")
+    con.search("OU=People,DC=mailloadtest,DC=com",f"(cis2uid={uniqid})")
     entries = con.entries 
     if entries:
         myvalues = {'output':True}
